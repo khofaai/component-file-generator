@@ -1,0 +1,21 @@
+{
+  "name": "generator",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khofaai/generator.git"
+  },
+  "author": "Anas El Alami",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/khofaai/generator/issues"
+  },
+  "homepage": "https://github.com/khofaai/generator#readme",
+  "dependencies": {}
+}

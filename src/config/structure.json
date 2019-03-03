@@ -1,0 +1,37 @@
+{
+	"name":"[name]",
+	"children":[
+		{
+			"type": "directory",
+			"name":"__test__",
+			"children": [
+				{
+					"type": "file",
+					"name": "[name].test.js"
+				},
+				{
+					"type": "directory",
+					"name": "draft",
+					"children": [{
+						"type": "file",
+						"name": "[name].test.[name].jx"
+					}]
+				}
+			]
+		},
+		{
+			"type": "file",
+			"name": "readme.md",
+			"content": "# [name]\n description \n\n## inputs \n\n description \n\n## outputs \n\n description "
+		},
+		{
+			"type": "file",
+			"name": "[name].js"
+		},
+		{
+			"type": "file",
+			"name": "package.json",
+			"content":"{\n\t\"main\": \" [name].js\"\n}"
+		}
+	]
+}
