@@ -1,17 +1,19 @@
 const filesystem = require('./filesystem');
 const configurator = require('./configurator');
 filesystem.setSource("./src/components");
+let structureTarget = '';
 
 module.exports = {
 
-	promptQuestions() {
+	promptQuestions(target) {
+		structureTarget = target !== '' ? `/${target}` : '';
 		configurator.startCLI(componentName => {
 			this.generateComponent(componentName) 
 		});
 	},
 
 	generateComponent(componentName) {
-		let structure = require('../config/structure');
+		let structure = require(`../config${structureTarget}/structure`);
 		let str = JSON.stringify(structure);
 		let replaceAll = (search, replacement, target) => {
 		    return target.split(search).join(replacement);

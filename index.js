@@ -1,2 +1,7 @@
 let cli = require('./src/cli');
-cli.run();
+
+module.exports = {
+    exec(target = '') {
+        cli.run(target);
+    }
+}

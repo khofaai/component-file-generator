@@ -1,6 +1,6 @@
 {
-  "name": "generator",
-  "version": "0.0.1",
+  "name": "component-file-generator",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,13 +9,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/khofaai/generator.git"
+    "url": "https://github.com/khofaai/component-file-generator.git"
   },
   "author": "Anas El Alami",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/khofaai/generator/issues"
+    "url": "https://github.com/khofaai/component-file-generator/issues"
   },
-  "homepage": "https://github.com/khofaai/generator#readme",
+  "homepage": "https://github.com/khofaai/component-file-generator#readme",
   "dependencies": {}
 }
