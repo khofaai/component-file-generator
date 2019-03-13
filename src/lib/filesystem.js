@@ -25,7 +25,6 @@ module.exports = {
 		fs.appendFile(filePath, content, function (err) {
 		  	if (err) throw err;
 		  	typeof callback == 'function' && callback();
-	    	}
 		});
 	}
 }
