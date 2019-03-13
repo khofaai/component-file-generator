@@ -16,9 +16,7 @@ module.exports = {
 		dirPath = this.srcPath(dirPath);
 		if (!fs.existsSync(dirPath)){
 		    fs.mkdirSync(dirPath);
-		    if (typeof callback == 'function') {
-		    	callback();
-		    }
+		    typeof callback == 'function' && callback();
 		}
 	},
 	
@@ -26,8 +24,7 @@ module.exports = {
 		filePath = this.srcPath(filePath);
 		fs.appendFile(filePath, content, function (err) {
 		  	if (err) throw err;
-		  	if (typeof callback == 'function') {
-	    		callback();
+		  	typeof callback == 'function' && callback();
 	    	}
 		});
 	}
