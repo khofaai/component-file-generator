@@ -6,7 +6,7 @@ this package helps me and our team to generate complex components structues by e
 
 you can install it using npm :
 ```bash
-npm i component-generator
+npm i component-file-generator
 ```
 
 # Setup
