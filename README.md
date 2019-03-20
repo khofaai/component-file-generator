@@ -55,10 +55,10 @@ it will generate the target component with minimal content.
 
 # Instance
 
-| Name | description |
-|----|----|
-|reactjs|DONE|
-|angular|NOT YET|
-|Vuejs|NOT YET|
-|expressjs|NOT YET|
+|  Name       |   description |
+|  ----       |   ----        |
+|  reactjs    |   DONE        |
+|  angular    |   NOT YET     |
+|  Vuejs      |   NOT YET     |
+|  expressjs  |   NOT YET     |
 

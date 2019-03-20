@@ -33,7 +33,7 @@
 		{
 			"type": "file",
 			"name": "package.json",
-			"content":"{\n\t\"name\": \"[name]\",\n\t\"version\": \"0.0.1\",\n\t\"main\": \" [name].js\"\n}"
+			"content":"{\n\t\"name\": \"[name]\",\n\t\"version\": \"0.0.1\",\n\t\"main\": \"./[name].js\"\n}"
 		}
 	]
 }
