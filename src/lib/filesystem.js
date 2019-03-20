@@ -26,5 +26,10 @@ module.exports = {
 		  	if (err) throw err;
 		  	typeof callback == 'function' && callback();
 		});
+	},
+
+	checkDirectoryExistance(dirPath) {
+		dirPath = this.srcPath(dirPath);
+		return fs.existsSync(dirPath);
 	}
 }

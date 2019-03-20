@@ -1,7 +1,9 @@
 const filesystem = require('./filesystem');
 const configurator = require('./configurator');
+const variable = '[name]';
 filesystem.setSource("./src/components");
 let structureTarget = '';
+
 
 module.exports = {
 
@@ -18,21 +20,28 @@ module.exports = {
 		let replaceAll = (search, replacement, target) => {
 		    return target.split(search).join(replacement);
 		};
-		str = JSON.parse(replaceAll('[name]', componentName, str));
-		this.mkStructure(str);
+		str = JSON.parse(replaceAll(variable, componentName, str));
+		this.mkStructure(str, () => {
+			console.log("\x1b[42m", `${componentName} has been created successfully`, "\x1b[0m");
+		});
 	},
 
-	mkStructure(structure) {
+	mkStructure(structure, callback) {
 		let structureKeys = Object.keys(structure);
 		let parentPath = '';
-		structureKeys.map( key => {
-			if (key == 'name' && typeof structure[key] === 'string' ) {
-				filesystem.makeDirectory(structure[key]);
-				parentPath += structure[key];
-			} else {
-				this.mapStructure(parentPath,structure[key]);
-			}
-		});
+		if(!filesystem.checkDirectoryExistance(structure.name)) {
+			structureKeys.map( key => {
+				if (key == 'name' && typeof structure[key] === 'string' ) {
+					filesystem.makeDirectory(structure[key]);
+					parentPath += structure[key];
+				} else {
+					this.mapStructure(parentPath, structure[key]);
+				}
+			});
+			callback();
+		} else {
+			console.error("\x1b[41m", `${structure.name} already exist !`, "\x1b[0m");
+		}
 	},
 
 	mapStructure(parentPath, structure) {
@@ -40,14 +49,14 @@ module.exports = {
 			if (_obj.type == 'directory') {
 				filesystem.makeDirectory(parentPath+'/'+_obj.name);
 				if (typeof _obj.children !== 'undefined') {
-					this.mapStructure(parentPath+'/'+_obj.name, _obj.children);
+					this.mapStructure(parentPath + '/' + _obj.name, _obj.children);
 				}
 			} else {
 				let _content = typeof _obj.content !== 'undefined' ? _obj.content : '';
 				if (typeof _content == 'object') {
 					_content = JSON.stringify(_content);
 				}
-				filesystem.makeFile(parentPath+'/'+_obj.name, _content);
+				filesystem.makeFile(parentPath + '/' + _obj.name, _content);
 			}
 		});
 	},

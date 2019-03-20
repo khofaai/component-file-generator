@@ -22,7 +22,7 @@ also create a simple file in your app root :
 
 with the following code : 
 ```javascript
-const generator = require('generator');
+const generator = require('component-file-generator');
 generator.exec('reactjs');
 ```
 
