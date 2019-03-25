@@ -3,26 +3,51 @@ const configurator = require('./configurator');
 const variable = '[name]';
 filesystem.setSource("./src/components");
 let structureTarget = '';
-
+let structureOptions = '';
 
 module.exports = {
 
+	getConfigStructure() {
+		return require(`../config${structureTarget}/structure`);
+	},
+
 	promptQuestions(target) {
-		structureTarget = target !== '' ? `/${target}` : '';
-		configurator.startCLI(componentName => {
-			this.generateComponent(componentName) 
-		});
+		if(typeof target === 'object' && target.length > 0) {
+			configurator.startCLI(componentData => {
+				this.generateCustomComponent(componentData)
+			}, target);
+		} else {
+			structureTarget = target !== '' ? `/${target}` : '';
+			configurator.startCLI(componentName => {
+				this.generateComponent(componentName) 
+			});
+		}
 	},
 
 	generateComponent(componentName) {
-		let structure = require(`../config${structureTarget}/structure`);
+		let structure = this.getConfigStructure();
 		let str = JSON.stringify(structure);
 		let replaceAll = (search, replacement, target) => {
 		    return target.split(search).join(replacement);
 		};
 		str = JSON.parse(replaceAll(variable, componentName, str));
+		
 		this.mkStructure(str, () => {
 			console.log("\x1b[42m", `${componentName} has been created successfully`, "\x1b[0m");
+		});
+	},
+
+	generateCustomComponent(componentData) {
+		let structure = componentData.body.structure;
+
+		let str = JSON.stringify(structure);
+		let replaceAll = (search, replacement, target) => {
+		    return target.split(search).join(replacement);
+		};
+		str = JSON.parse(replaceAll(variable, componentData.answer, str));
+		filesystem.setSource(componentData.body.root);	
+		this.mkStructure(str, () => {
+			console.log("\x1b[42m", `${componentData.answer} has been created successfully`, "\x1b[0m");
 		});
 	},
 

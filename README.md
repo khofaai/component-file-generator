@@ -31,15 +31,14 @@ for the above example we make `reactjs` component as follwing :
 ```
 └── src
     ├── components
-        ├── [ComponentNameA]
-        │    ├── __snapshots__
-        │    │     ├── [ComponentNameA].spec.js.snap
-        │    ├── [ComponentNameA].spec.js
-        │    ├── [ComponentNameA].js
-        │    ├── [ComponentNameA].scss
-        │    ├── README.md
-        │    └── package.json
-        ├
+				├── [ComponentNameA]
+				│    ├── __snapshots__
+				│    │     ├── [ComponentNameA].spec.js.snap
+				│    ├── [ComponentNameA].spec.js
+				│    ├── [ComponentNameA].js
+				│    ├── [ComponentNameA].scss
+				│    ├── README.md
+						└── package.json
 ```
 
 to Execut it from root project using CLI :
@@ -62,3 +61,36 @@ it will generate the target component with minimal content.
 |  Vuejs      |   NOT YET     |
 |  expressjs  |   NOT YET     |
 
+# Custom Structure
+
+For now you can add multiple custom component types :
+```javascript
+generator.exec([
+  {
+		'service': {
+			root:'./app/services',
+			structure: {
+				name: "[name]",
+				children:[
+					{
+							type: "file",
+							name: "readme.md",
+							content: "# [name] Service\n description"
+					},
+					{
+							type: "file",
+							name: "[name]Service.js",
+							content: `import Service from '../Service';\n\nexport default class [name] {\n\t// instruction\n\t}\n}\n`
+					},
+					{
+							type: "file",
+							name: "package.json",
+							content: "{\n\t\"main\": \"./[name]Service.js\"\n}"
+					}
+				]
+			}
+		}
+	},
+	...
+]);
+```
