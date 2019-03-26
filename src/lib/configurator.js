@@ -59,9 +59,6 @@ const config = {
 		config.rl.close();
 	},
 
-	makeQuestion(question, callback) {
-		await config.makeQuestion(question, callback)
-	}
 }
 
 

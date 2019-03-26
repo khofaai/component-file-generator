@@ -7,16 +7,65 @@ let structureOptions = '';
 
 module.exports = {
 
+	checkUpperCase(componentName) {
+		let len = componentName.length;
+		for(var i=0;i<len;i++) {
+			if(/[A-Z]/.test(componentName.charAt(i))) {
+				return true;
+			}
+		  }
+		return false;
+	},
+
+	checkNameFormat(componentName) {
+		if (componentName.match(/[A-Z]/)) { // if its all UpperCase ... for some reason .. watch your CapsLock pls
+			componentName = componentName.toLowerCase();
+			componentName = componentName.charAt(0).toUpperCase() + componentName.slice(1); 
+			return componentName;
+		}
+		if (/[A-Z]/.test(componentName.charAt(0))){ // if it starts with an upperCase
+			return componentName; // return true
+		} else {
+			if (this.checkUpperCase(componentName)) { // if it has an upperCase within
+				return componentName; // return true
+			} else { // in this case we make the first char an upperCase
+				componentName = componentName.charAt(0).toUpperCase() + componentName.slice(1); 
+				return componentName;
+			}
+		}
+	},
+
+	checkMultipleNames(componentName) {
+		let vessel = componentName.split(' ');
+		if (vessel.length === 1) { // componentName is one word
+			return componentName; // return true
+		} else { // componentName is many words
+			let len = vessel.length;
+			let temp = vessel[0];
+			for(var i=1;i<len;i++) { // skip the first word
+				temp = `${temp}${vessel[i].charAt(0).toUpperCase()}${vessel[i].slice(1)}`; // concat the second word with upperCAsing its first Char
+			}
+			return temp;
+		}
+	},
+
 	promptQuestions(target) {
 		if(typeof target === 'object' && target.length > 0) {
 			configurator.startCLI(componentData => {
 				this.generateCustomComponent(componentData)
 			}, target);
 		} else {
-			// check name format
+
 			structureTarget = target !== '' ? `/${target}` : '';
-			// end check
+
 			configurator.startCLI(componentName => {
+				// check name format (no lowerCase only)
+				componentName = this.checkNameFormat(componentName);
+
+				// check for multiple names
+				componentName = this.checkMultipleNames(componentName);
+
+				// end check
 				this.generateComponent(componentName) 
 			});
 		}
