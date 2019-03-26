@@ -3,7 +3,6 @@ const configurator = require('./configurator');
 const variable = '[name]';
 filesystem.setSource("./src/components");
 let structureTarget = '';
-let structureOptions = '';
 
 module.exports = {
 
