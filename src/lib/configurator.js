@@ -44,20 +44,23 @@ const config = {
 			defaultCommand.push(key);
 			multipleChoiceStructures[key] = choice[key];
 		});
-
-		await config.makeQuestion(`${cmdNames} ?\n`, answer => {
+		this.makeQuestion(`${cmdNames} ?\n`, answer => {
 			selectedCommand = answer
-		});
+		})
 		
 		if(defaultCommand,defaultCommand.includes(selectedCommand)) {
-			await config.makeQuestion(`${selectedCommand} name ?\n`, answer => {
+			this.makeQuestion(`${selectedCommand} name ?\n`, answer => {
 				config.componentName = { answer, body: multipleChoiceStructures[selectedCommand] };
-			})
+			});
 			callback(config.componentName);
 		} else {
 			console.error("\x1b[41m", `generator not found !`, "\x1b[0m");
 		}
 		config.rl.close();
+	},
+
+	makeQuestion(question, callback) {
+		await config.makeQuestion(question, callback)
 	}
 }
 

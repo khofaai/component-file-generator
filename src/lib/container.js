@@ -7,17 +7,15 @@ let structureOptions = '';
 
 module.exports = {
 
-	getConfigStructure() {
-		return require(`../config${structureTarget}/structure`);
-	},
-
 	promptQuestions(target) {
 		if(typeof target === 'object' && target.length > 0) {
 			configurator.startCLI(componentData => {
 				this.generateCustomComponent(componentData)
 			}, target);
 		} else {
+			// check name format
 			structureTarget = target !== '' ? `/${target}` : '';
+			// end check
 			configurator.startCLI(componentName => {
 				this.generateComponent(componentName) 
 			});
@@ -25,7 +23,7 @@ module.exports = {
 	},
 
 	generateComponent(componentName) {
-		let structure = this.getConfigStructure();
+		let structure = require(`../config${structureTarget}/structure`);
 		let str = JSON.stringify(structure);
 		let replaceAll = (search, replacement, target) => {
 		    return target.split(search).join(replacement);
@@ -39,7 +37,6 @@ module.exports = {
 
 	generateCustomComponent(componentData) {
 		let structure = componentData.body.structure;
-
 		let str = JSON.stringify(structure);
 		let replaceAll = (search, replacement, target) => {
 		    return target.split(search).join(replacement);

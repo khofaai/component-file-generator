@@ -73,19 +73,19 @@ generator.exec([
 				name: "[name]",
 				children:[
 					{
-							type: "file",
-							name: "readme.md",
-							content: "# [name] Service\n description"
+						type: "file",
+						name: "readme.md",
+						content: "# [name] Service\n description"
 					},
 					{
-							type: "file",
-							name: "[name]Service.js",
-							content: `import Service from '../Service';\n\nexport default class [name] {\n\t// instruction\n\t}\n}\n`
+						type: "file",
+						name: "[name]Service.js",
+						content: `import Service from '../Service';\n\nexport default class [name] {\n\t// instruction\n\t}\n}\n`
 					},
 					{
-							type: "file",
-							name: "package.json",
-							content: "{\n\t\"main\": \"./[name]Service.js\"\n}"
+						type: "file",
+						name: "package.json",
+						content: "{\n\t\"main\": \"./[name]Service.js\"\n}"
 					}
 				]
 			}
