@@ -7,34 +7,47 @@ let structureOptions = '';
 
 module.exports = {
 
-	checkUpperCase(componentName) {
-		for (let i = 0; i < componentName.length; i++) {
-			if (componentName.charAt(i) === componentName.charAt(i).toUpperCase()) {
-				return true;
-			}
-		}
-		return false;
-	},
 
 	CaptalizeFirstLetter(componentName) {
 		if (componentName === componentName.toLowerCase()) {
 			console.log("1");
 			return componentName.charAt(0).toUpperCase() + componentName.slice(1);
-		} else if (componentName === componentName.toUpperCase()) {
+		}
+		else if (componentName === componentName.toUpperCase()) {
 			console.log("2");
-			let str = componentName.charAt(0);
-			for (let i = 1; i < componentName.length; i++) {
-				str = str + componentName.charAt(i).toLowerCase();
-			}
+			let str = componentName.charAt(0) + componentName.slice(1).toLowerCase();
+			// for (let i = 1; i < componentName.length; i++) {
+			// 	str = str + componentName.charAt(i).toLowerCase();
+			// }
 			return str;
 		}
 		else if (componentName.charAt(0) === componentName.charAt(0).toUpperCase()) {
 			console.log("3");
+			str = componentName.charAt(0) + componentName.slice(1);
+			return str;
+		}
+		else {
+			console.log("4");
+			str = componentName.charAt(0).toUpperCase() + componentName.slice(1);
+			return str;
+		}
+
+	},
+
+	EliminateSpaces(componentName) {
+		console.log("this is a test" + componentName);
+		let sliced = componentName.split(' ');
+		if (sliced.length == 1) {
+			console.log("this is a test" + componentName);
 			return componentName;
 		}
-		else if (this.checkUpperCase(componentName)) {
-			console.log("4");
-			return componentName;
+		else {
+			let str = '';
+			let len = sliced.length;
+			for (let i = 0; i < len; i++) {
+				str = str + sliced[i].charAt(0).toUpperCase() + sliced[i].slice(1).toLowerCase();
+			}
+			return str;
 		}
 
 	},
@@ -48,6 +61,7 @@ module.exports = {
 			structureTarget = target !== '' ? `/${target}` : '';
 			configurator.startCLI(componentName => {
 				componentName = this.CaptalizeFirstLetter(componentName);
+				componentName = this.EliminateSpaces(componentName);
 				this.generateComponent(componentName)
 			});
 		}
