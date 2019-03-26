@@ -17,7 +17,7 @@ describe('ask', function () {
     return ask('test')
       .then(function () {
         assert.ok(true);
-        done();
+        setTimeout(done, 300);
       });
   });
 });
