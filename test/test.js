@@ -14,10 +14,10 @@ it('when running generator by keyword as params `reactjs`\n', function() {
 
 describe('ask', function () {
   it('asks a question', function (done) {
+    setTimeout(done, 500);
     return ask('test')
       .then(function () {
         assert.ok(true);
-        setTimeout(done, 300);
       });
   });
 });
