@@ -13,11 +13,11 @@ it('when running generator by keyword as params `reactjs`\n', function() {
 });
 
 describe('ask', function () {
-  it('asks a question', function () {
+  it('asks a question', function (done) {
     return ask('test')
       .then(function () {
         assert.ok(true);
-        // ?
+        done();
       });
   });
 });
