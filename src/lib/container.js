@@ -44,7 +44,7 @@ module.exports = {
 			let temp = vessel[0].toLowerCase();
 			for(let i=1; i<len; i++) { // skip the first word
 				temp = `${temp}${vessel[i].charAt(0).toUpperCase()}${vessel[i].slice(1)}`; // concat the second word with upperCAsing its first Char
-		}
+			}
 			return temp;
 		}
 	},
