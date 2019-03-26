@@ -9,11 +9,11 @@ module.exports = {
 
 	checkUpperCase(componentName) {
 		let len = componentName.length;
-		for(var i=0;i<len;i++) {
+		for(let i=0; i<len; i++) {
 			if(/[A-Z]/.test(componentName.charAt(i))) {
 				return true;
 			}
-		  }
+		}
 		return false;
 	},
 
@@ -42,9 +42,9 @@ module.exports = {
 		} else { // componentName is many words
 			let len = vessel.length;
 			let temp = vessel[0];
-			for(var i=1;i<len;i++) { // skip the first word
+			for(let i=1; i<len; i++) { // skip the first word
 				temp = `${temp}${vessel[i].charAt(0).toUpperCase()}${vessel[i].slice(1)}`; // concat the second word with upperCAsing its first Char
-			}
+		}
 			return temp;
 		}
 	},
