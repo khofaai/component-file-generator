@@ -19,14 +19,13 @@ module.exports = {
 
 	checkNameFormat(componentName) {
 		if (/[A-Z]/.test(componentName)) { // if its all UpperCase ... for some reason .. watch your CapsLock pls
-			componentName = componentName.toLowerCase();
-			componentName = componentName.charAt(0).toUpperCase() + componentName.slice(1); 
+			componentName = componentName.charAt(0) + componentName.slice(1).toLowerCase(); 
 			return componentName;
 		}
 		if (/[A-Z]/.test(componentName.charAt(0))){ // if it starts with an upperCase
 			return componentName; // return true
 		} else {
-			if (this.checkUpperCase(componentName)) { // if it has an upperCase within
+			if (this.checkUpperCase(componentName)) { // if it has an upperCase within // TODO
 				return componentName; // return true
 			} else { // in this case we make the first char an upperCase
 				componentName = componentName.charAt(0).toUpperCase() + componentName.slice(1); 
@@ -41,9 +40,9 @@ module.exports = {
 			return componentName; // return true
 		} else { // componentName is many words
 			let len = vessel.length;
-			let temp = vessel[0].toLowerCase();
-			for(let i=1; i<len; i++) { // skip the first word
-				temp = `${temp}${vessel[i].charAt(0).toUpperCase()}${vessel[i].slice(1)}`; // concat the second word with upperCAsing its first Char
+			let temp = '';
+			for(let i=0; i<len; i++) { // skip the first word
+				temp = `${temp}${vessel[i].charAt(0).toUpperCase()}${vessel[i].slice(1).toLowerCase()}`; // concat the second word with upperCAsing its first Char
 			}
 			return temp;
 		}
