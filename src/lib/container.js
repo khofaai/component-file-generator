@@ -1,7 +1,7 @@
 const filesystem = require('./filesystem');
 const configurator = require('./configurator');
 const variable = '[name]';
-filesystem.setSource("./src/components");
+filesystem.setSource("./src/" + ((process.argv[2]) ? process.argv[2] : "components"));
 let structureTarget = '';
 let structureOptions = '';
 
@@ -11,13 +11,12 @@ module.exports = {
 	checkNameFormat(componentName) {
 		if ( componentName === componentName.toUpperCase() ) { // if its all UpperCase ... for some reason .. watch your CapsLock pls
 			componentName = componentName.charAt(0) + componentName.slice(1).toLowerCase(); 
-			return componentName;
 		}
 		if ( !(/[A-Z]/.test(componentName.charAt(0))) ){ // if it starts with an upperCase
-			console.log("FUCKING SHIT");
 			componentName = componentName.charAt(0).toUpperCase() + componentName.slice(1);
-			return componentName;
 		}
+		componentName = this.checkMultipleNames(componentName);
+		return componentName;
 	},
 
 	checkMultipleNames(componentName) {
@@ -46,10 +45,6 @@ module.exports = {
 			configurator.startCLI(componentName => {
 				// check name format (no lowerCase only)
 				componentName = this.checkNameFormat(componentName);
-
-				// check for multiple names
-				componentName = this.checkMultipleNames(componentName);
-
 				// end check
 				this.generateComponent(componentName) 
 			});

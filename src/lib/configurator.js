@@ -23,7 +23,7 @@ const config = {
 	},
 
 	runQuestions: async (callback) => {
-  		await config.makeQuestion("component name ? \n", answer => {
+  		await config.makeQuestion(process.argv[2] + " name ? \n", answer => {
   			config.componentName = answer;
   		});
   		callback(config.componentName);
