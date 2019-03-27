@@ -9,36 +9,26 @@ module.exports = {
 
 
 	CaptalizeFirstLetter(componentName) {
+		let str = '';
 		if (componentName === componentName.toLowerCase()) {
-			console.log("1");
-			return componentName.charAt(0).toUpperCase() + componentName.slice(1);
+			str = componentName.charAt(0).toUpperCase() + componentName.slice(1);
 		}
 		else if (componentName === componentName.toUpperCase()) {
-			console.log("2");
-			let str = componentName.charAt(0) + componentName.slice(1).toLowerCase();
-			// for (let i = 1; i < componentName.length; i++) {
-			// 	str = str + componentName.charAt(i).toLowerCase();
-			// }
-			return str;
+			str = componentName.charAt(0) + componentName.slice(1).toLowerCase();
 		}
 		else if (componentName.charAt(0) === componentName.charAt(0).toUpperCase()) {
-			console.log("3");
 			str = componentName.charAt(0) + componentName.slice(1);
-			return str;
 		}
 		else {
-			console.log("4");
 			str = componentName.charAt(0).toUpperCase() + componentName.slice(1);
-			return str;
 		}
-
+		str = this.EliminateSpaces(str);
+		return str;
 	},
 
 	EliminateSpaces(componentName) {
-		console.log("this is a test" + componentName);
 		let sliced = componentName.split(' ');
 		if (sliced.length == 1) {
-			console.log("this is a test" + componentName);
 			return componentName;
 		}
 		else {
@@ -61,7 +51,6 @@ module.exports = {
 			structureTarget = target !== '' ? `/${target}` : '';
 			configurator.startCLI(componentName => {
 				componentName = this.CaptalizeFirstLetter(componentName);
-				componentName = this.EliminateSpaces(componentName);
 				this.generateComponent(componentName)
 			});
 		}
