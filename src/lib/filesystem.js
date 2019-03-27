@@ -9,6 +9,10 @@ module.exports = {
 	},
 
 	srcPath(path) {
+		// add components check here
+		if (!fs.existsSync(this.source)) {
+			fs.mkdirSync(this.source);
+		}
 		return this.source != '' ? `${this.source}/${path}` : path;
 	},
 
