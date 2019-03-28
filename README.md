@@ -65,6 +65,18 @@ _
 ```
 it will generate the target component with minimal content in the ./src/[dir name] directory.
 
+Ex:
+```bash
+node generator services
+```
+it will prompt a question :
+```bash
+services name ?
+_
+```
+if you type in "LoginService", the resulting component will be named "LoginService" inside the /src/services directory.
+
+
 # Hints
 
 You may use spaces and type at ease for this generator does have syntax corrections.
@@ -78,7 +90,7 @@ it will prompt a question :
 Its name ?
 _
 ```
-if you type in next step is part two, the resulting component will be named NextStepUsPartTwo.
+if you type in "next step is part two", the resulting component will be named "NextStepIsPartTwo".
 
 # Instance
 
