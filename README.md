@@ -104,13 +104,9 @@ if you type in **`next step is part two`**, the resulting component will be name
 # Custom Structure
 
 For now you can add multiple custom component types, you pass `array` with each element as an object with : 
-<br/>
-`{`
+
 - `root` folder where to generate structure
 - `structure` that containe your component file architecture
-<br/>
-`}`
-<br/>
 
 ```javascript
 generator.exec([
