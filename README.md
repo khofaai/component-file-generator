@@ -38,7 +38,7 @@ for the above example we make `reactjs` component as follwing :
         │    ├── [ComponentNameA].js
         │    ├── [ComponentNameA].scss
         │    ├── README.md
-            └── package.json
+             └── package.json
 ```
 
 to Execut it from root project using CLI :
@@ -63,7 +63,7 @@ it will prompt a question :
 [dir name] name ?
 _
 ```
-it will generate the target component with minimal content in the ./src/[dir name] directory.
+it will generate the target component with minimal content in the `./src/[dir name]` directory.
 
 Ex:
 ```bash
@@ -74,12 +74,12 @@ it will prompt a question :
 services name ?
 _
 ```
-if you type in **`LoginService`**, the resulting component will be named **`LoginService`** inside the `/src/services` directory.
+if you type in **`LoginService`**, the resulting component will be named **`LoginService`** inside the `./src/services` directory.
 
 
 # Hints
 
-You may use spaces and type at ease for this generator does have syntax corrections.
+You may use spaces and type at ease for this generator does have **syntax corrections**.
 
 Ex:
 ```bash
@@ -96,6 +96,7 @@ if you type in **`next step is part two`**, the resulting component will be name
 
 |  Name       |   description |
 |  ----       |   ----        |
+|  Custom     |   DONE        |
 |  reactjs    |   DONE        |
 |  angular    |   NOT YET     |
 |  Vuejs      |   NOT YET     |
@@ -103,11 +104,11 @@ if you type in **`next step is part two`**, the resulting component will be name
 
 # Custom Structure
 
-For now you can add multiple custom component types, you pass `array` with each element as an object with : 
-
+For now you can add multiple custom component types, you pass `array` with each element as an object with a key that has component name, like our example is `service` and :
 - `root` folder where to generate structure
 - `structure` that containe your component file architecture
 
+Example :
 ```javascript
 generator.exec([
   {
@@ -138,3 +139,8 @@ generator.exec([
   ...
 ]);
 ```
+
+## Next
+- For structure proprety `content` will be able accept path for file templates too
+- Improuve CLI experience
+- Write proper documentation
