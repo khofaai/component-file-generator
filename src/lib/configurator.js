@@ -1,4 +1,5 @@
 const readline = require('readline');
+const currentDirName = ((process.argv[2]) ? process.argv[2] : "Its");
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 
 const config = {
@@ -23,7 +24,7 @@ const config = {
 	},
 
 	runQuestions: async (callback) => {
-  		await config.makeQuestion(process.argv[2] + " name ? \n", answer => {
+  		await config.makeQuestion(currentDirName + " name ? \n", answer => {
   			config.componentName = answer;
   		});
   		callback(config.componentName);

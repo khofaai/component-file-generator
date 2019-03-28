@@ -42,15 +42,43 @@ for the above example we make `reactjs` component as follwing :
 ```
 
 to Execut it from root project using CLI :
+
 ```bash
 node generator
 ```
 it will prompt a question :
 ```bash
-component name ?
+Its name ?
 _
 ```
-it will generate the target component with minimal content.
+it will generate the target component with minimal content in the ./src/component directory as its default directory.
+
+for a more customizable execution:
+
+```bash
+node generator [dir name]
+```
+it will prompt a question :
+```bash
+[dir name] name ?
+_
+```
+it will generate the target component with minimal content in the ./src/[dir name] directory.
+
+# Hints
+
+You may use spaces and type at ease for this generator does have syntax corrections.
+
+Ex:
+```bash
+node generator
+```
+it will prompt a question :
+```bash
+Its name ?
+_
+```
+if you type in next step is part two, the resulting component will be named NextStepUsPartTwo.
 
 # Instance
 
