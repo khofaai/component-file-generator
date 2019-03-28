@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --exit",
     "generate": "node index.js"
   },
   "repository": {
@@ -17,5 +17,8 @@
     "url": "https://github.com/khofaai/component-file-generator/issues"
   },
   "homepage": "https://github.com/khofaai/component-file-generator#readme",
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^6.0.2"
+  }
 }

@@ -5,7 +5,6 @@ const defaultDirName = "components";
 const currentDirName = ((process.argv[2]) ? process.argv[2] : defaultDirName);
 filesystem.setSource("./src/" + currentDirName);
 let structureTarget = '';
-let structureOptions = '';
 
 module.exports = {
 
