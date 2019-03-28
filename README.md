@@ -31,14 +31,14 @@ for the above example we make `reactjs` component as follwing :
 ```
 └── src
     ├── components
-				├── [ComponentNameA]
-				│    ├── __snapshots__
-				│    │     ├── [ComponentNameA].spec.js.snap
-				│    ├── [ComponentNameA].spec.js
-				│    ├── [ComponentNameA].js
-				│    ├── [ComponentNameA].scss
-				│    ├── README.md
-						└── package.json
+        ├── [ComponentNameA]
+        │    ├── __snapshots__
+        │    │     ├── [ComponentNameA].spec.js.snap
+        │    ├── [ComponentNameA].spec.js
+        │    ├── [ComponentNameA].js
+        │    ├── [ComponentNameA].scss
+        │    ├── README.md
+            └── package.json
 ```
 
 to Execut it from root project using CLI :
@@ -74,7 +74,7 @@ it will prompt a question :
 services name ?
 _
 ```
-if you type in "LoginService", the resulting component will be named "LoginService" inside the /src/services directory.
+if you type in **`LoginService`**, the resulting component will be named **`LoginService`** inside the `/src/services` directory.
 
 
 # Hints
@@ -90,7 +90,7 @@ it will prompt a question :
 Its name ?
 _
 ```
-if you type in "next step is part two", the resulting component will be named "NextStepIsPartTwo".
+if you type in **`next step is part two`**, the resulting component will be named **`NextStepIsPartTwo`**.
 
 # Instance
 
@@ -103,34 +103,38 @@ if you type in "next step is part two", the resulting component will be named "N
 
 # Custom Structure
 
-For now you can add multiple custom component types :
+For now you can add multiple custom component types, you pass `array` with each element as an object with : 
+`{`
+- `root` folder where to generate structure
+- `structure` that containe your component file architecture
+`}`
 ```javascript
 generator.exec([
   {
-		'service': {
-			root:'./app/services',
-			structure: {
-				name: "[name]",
-				children:[
-					{
-						type: "file",
-						name: "readme.md",
-						content: "# [name] Service\n description"
-					},
-					{
-						type: "file",
-						name: "[name]Service.js",
-						content: `import Service from '../Service';\n\nexport default class [name] {\n\t// instruction\n\t}\n}\n`
-					},
-					{
-						type: "file",
-						name: "package.json",
-						content: "{\n\t\"main\": \"./[name]Service.js\"\n}"
-					}
-				]
-			}
-		}
-	},
-	...
+    'service': {
+      root:'./app/services',
+      structure: {
+        name: "[name]",
+        children:[
+          {
+            type: "file",
+            name: "readme.md",
+            content: "# [name] Service\n description"
+          },
+          {
+            type: "file",
+            name: "[name]Service.js",
+            content: `import Service from '../Service';\n\nexport default class [name] {\n\t// instruction\n\t}\n}\n`
+          },
+          {
+            type: "file",
+            name: "package.json",
+            content: "{\n\t\"main\": \"./[name]Service.js\"\n}"
+          }
+        ]
+      }
+    }
+  },
+  ...
 ]);
 ```
