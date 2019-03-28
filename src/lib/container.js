@@ -1,7 +1,9 @@
 const filesystem = require('./filesystem');
 const configurator = require('./configurator');
 const variable = '[name]';
-filesystem.setSource("./src/" + ((process.argv[2]) ? process.argv[2] : "components"));
+const defaultDirName = "components";
+const currentDirName = ((process.argv[2]) ? process.argv[2] : defaultDirName);
+filesystem.setSource("./src/" + currentDirName);
 let structureTarget = '';
 
 module.exports = {
@@ -14,22 +16,21 @@ module.exports = {
 		if ( !(/[A-Z]/.test(componentName.charAt(0))) ){ // if it starts with an upperCase
 			componentName = componentName.charAt(0).toUpperCase() + componentName.slice(1);
 		}
-		componentName = this.checkMultipleNames(componentName);
-		return componentName;
+
+		return this.checkMultipleNames(componentName);
 	},
 
 	checkMultipleNames(componentName) {
 		let vessel = componentName.split(' ');
-		if (vessel.length === 1) { // componentName is one word
-			return componentName; // return true
-		} else { // componentName is many words
+		if (!(vessel.length === 1)) { // componentName is many words
 			let len = vessel.length;
 			let temp = '';
 			for ( let i = 0; i < len; i++ ) { // skip the first word
 				temp = `${temp}${vessel[i].charAt(0).toUpperCase()}${vessel[i].slice(1).toLowerCase()}`; // concat the second word with upperCAsing its first Char
 			}
-			return temp;
+			componentName = temp;
 		}
+		return componentName;
 	},
 
 	promptQuestions(target) {
