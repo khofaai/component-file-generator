@@ -32,10 +32,9 @@ for the above example we make `reactjs` component as follwing :
 └── src
     ├── components
         ├── [ComponentNameA]
-        │    ├── __snapshots__
-        │    │     ├── [ComponentNameA].spec.js.snap
         │    ├── [ComponentNameA].spec.js
         │    ├── [ComponentNameA].js
+        │    ├── [ComponentNameA]Container.js
         │    ├── [ComponentNameA].scss
         │    ├── README.md
              └── package.json
