@@ -14,7 +14,7 @@
 		{
 			"type": "file",
 			"name": "[name].js",
-			"content" : "import React, { Component } from 'react';\nimport './[name].scss';\n\nclass [name] extends Component {\n\trender() {\n\t\treturn (\n\t\t\t<h1>[name]</h1>\n\t\t);\n\t}\n}\n\nexport default [name];"
+			"content" : "import React from 'react';\nimport './[name].scss';\n\nlet [name] = () => {\n\treturn (\n\t\t\t<h1>[name]</h1>\n\t\t);\n}\n\nexport default [name];"
 		},
 		{
 			"type": "file",
