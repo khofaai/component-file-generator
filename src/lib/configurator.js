@@ -1,4 +1,5 @@
 const readline = require('readline');
+const selectOptions = require('./select');
 var currentDirName = (process.argv[2] ? process.argv[2] : "Its");
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 
@@ -14,7 +15,7 @@ const config = {
 		}
 	},
 
-	makeQuestion (question, callback) {
+	makeQuestion(question, callback) {
 		return new Promise((resolve, reject) => {
 			config.rl.question(question, (answer) => {
 				callback(answer)
@@ -23,7 +24,16 @@ const config = {
 		});
 	},
 
-	async runQuestions (callback) {
+	makeOptionQuestion({question, options}, callback) {
+		return new Promise((resolve, reject) => {
+			selectOptions.init(rl,{ question, options }, (option) => {
+				callback(option);
+				resolve(option);
+			});
+		});
+	},
+
+	async runQuestions(callback) {
 		await config.makeQuestion(currentDirName + " name ? \n", answer => {
 			config.componentName = answer;
 		});
@@ -32,7 +42,6 @@ const config = {
 	},
 
 	async runMultipleChoiceQuestion(multipleChoices, callback) {
-
 		let cmdNames = 'Generate : ';
 		let selectedCommand = '';
 		let defaultCommand = [];
@@ -55,8 +64,11 @@ const config = {
 				multipleChoiceStructures[key] = choice[key];
 			});
 
-			await config.makeQuestion(`${cmdNames} ?\n`, answer => {
-				selectedCommand = answer
+			await config.makeOptionQuestion({
+				question: `which modules ?\n`,
+				options: defaultCommand
+			}, answer => {
+				selectedCommand = defaultCommand[answer]
 			});
 		}
 
