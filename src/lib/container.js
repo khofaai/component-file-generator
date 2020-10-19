@@ -6,8 +6,11 @@ const currentDirName = ((process.argv[2]) ? process.argv[2] : defaultDirName);
 filesystem.setSource("./src/" + currentDirName);
 let structureTarget = '';
 
-module.exports = {
+let replaceAll = (search, replacement, target) => {
+	return target.split(search).join(replacement);
+};
 
+module.exports = {
 
 	checkNameFormat(componentName) {
 		if ( componentName === componentName.toUpperCase() ) { // if its all UpperCase ... for some reason .. watch your CapsLock pls
@@ -34,12 +37,16 @@ module.exports = {
 	},
 
 	promptQuestions(target) {
-		if(typeof target === 'object' && target.length > 0) {
+
+		if(Array.isArray(target) && target.length > 0) {
 			configurator.startCLI(componentData => {
 				this.generateCustomComponent(componentData)
 			}, target);
+		} else if( typeof target === 'object') {
+			configurator.startCLI(componentData => {
+				this.generateCustomComponent(componentData)
+			}, [target]);
 		} else {
-
 			structureTarget = target !== '' ? `/${target}` : '';
 
 			configurator.startCLI(componentName => {
@@ -54,9 +61,6 @@ module.exports = {
 	generateComponent(componentName) {
 		let structure = require(`../config${structureTarget}/structure`);
 		let str = JSON.stringify(structure);
-		let replaceAll = (search, replacement, target) => {
-		    return target.split(search).join(replacement);
-		};
 
 		str = JSON.parse(replaceAll(variable, componentName, str));
 
@@ -68,14 +72,9 @@ module.exports = {
 	generateCustomComponent(componentData) {
 		let structure = componentData.body.structure;
 		let str = JSON.stringify(structure);
-		let replaceAll = (search, replacement, target) => {
-		    return target.split(search).join(replacement);
-		};
 		str = JSON.parse(replaceAll(variable, componentData.answer, str));
 		filesystem.setSource(componentData.body.root);
-		this.mkStructure(str, () => {
-			console.log("\x1b[42m", `${componentData.answer} has been created successfully`, "\x1b[0m");
-		});
+		this.mkStructure(str, () => console.log("\x1b[42m", `${componentData.answer} has been created successfully`, "\x1b[0m"));
 	},
 
 	mkStructure(structure, callback) {
