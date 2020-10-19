@@ -11,7 +11,7 @@ module.exports = {
 
 	checkNameFormat(componentName) {
 		if ( componentName === componentName.toUpperCase() ) { // if its all UpperCase ... for some reason .. watch your CapsLock pls
-			componentName = componentName.charAt(0) + componentName.slice(1).toLowerCase(); 
+			componentName = componentName.charAt(0) + componentName.slice(1).toLowerCase();
 		}
 		if ( !(/[A-Z]/.test(componentName.charAt(0))) ){ // if it starts with an upperCase
 			componentName = componentName.charAt(0).toUpperCase() + componentName.slice(1);
@@ -46,7 +46,7 @@ module.exports = {
 				// check name format (no lowerCase only)
 				componentName = this.checkNameFormat(componentName);
 				// end check
-				this.generateComponent(componentName) 
+				this.generateComponent(componentName)
 			});
 		}
 	},
@@ -57,8 +57,9 @@ module.exports = {
 		let replaceAll = (search, replacement, target) => {
 		    return target.split(search).join(replacement);
 		};
+
 		str = JSON.parse(replaceAll(variable, componentName, str));
-		
+
 		this.mkStructure(str, () => {
 			console.log("\x1b[42m", `${componentName} has been created successfully`, "\x1b[0m");
 		});
@@ -71,7 +72,7 @@ module.exports = {
 		    return target.split(search).join(replacement);
 		};
 		str = JSON.parse(replaceAll(variable, componentData.answer, str));
-		filesystem.setSource(componentData.body.root);	
+		filesystem.setSource(componentData.body.root);
 		this.mkStructure(str, () => {
 			console.log("\x1b[42m", `${componentData.answer} has been created successfully`, "\x1b[0m");
 		});

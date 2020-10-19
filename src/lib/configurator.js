@@ -5,7 +5,7 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
 const config = {
 	componentName : '',
 	rl,
-	
+
 	startCLI(callback, multipleChoices = {}) {
 		if(Object.keys(multipleChoices).length > 0 ) {
 			this.runMultipleChoiceQuestion(multipleChoices, callback);
@@ -32,7 +32,7 @@ const config = {
 	},
 
 	runMultipleChoiceQuestion: async (multipleChoices, callback) => {
-		
+
 		let cmdNames = 'Generate : ';
 		let selectedCommand = '';
 		let defaultCommand = [];
@@ -45,10 +45,15 @@ const config = {
 			defaultCommand.push(key);
 			multipleChoiceStructures[key] = choice[key];
 		});
-		await config.makeQuestion(`${cmdNames} ?\n`, answer => {
-			selectedCommand = answer
-		})
-		
+
+		if(multipleChoices.length === 1) {
+			selectedCommand = Object.keys(multipleChoices[0])[0]
+		} else {
+			await config.makeQuestion(`${cmdNames} ?\n`, answer => {
+				selectedCommand = answer
+			})
+		}
+
 		if(defaultCommand,defaultCommand.includes(selectedCommand)) {
 			await config.makeQuestion(`${selectedCommand} name ?\n`, answer => {
 				config.componentName = { answer, body: multipleChoiceStructures[selectedCommand] };

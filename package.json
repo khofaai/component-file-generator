@@ -1,6 +1,6 @@
 {
   "name": "component-file-generator",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -19,6 +19,6 @@
   "homepage": "https://github.com/khofaai/component-file-generator#readme",
   "dependencies": {},
   "devDependencies": {
-    "mocha": "^6.0.2"
+    "mocha": "^6.2.3"
   }
 }

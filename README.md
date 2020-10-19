@@ -20,7 +20,7 @@ also create a simple file in your app root :
     └── generator.js
 ```
 
-with the following code : 
+with the following code :
 ```javascript
 const generator = require('component-file-generator');
 generator.exec('reactjs');
@@ -91,16 +91,6 @@ _
 ```
 if you type in **`next step is part two`**, the resulting component will be named **`NextStepIsPartTwo`**.
 
-# Instance
-
-|  Name       |   description |
-|  ----       |   ----        |
-|  Custom     |   DONE        |
-|  reactjs    |   DONE        |
-|  angular    |   NOT YET     |
-|  Vuejs      |   NOT YET     |
-|  expressjs  |   NOT YET     |
-
 # Custom Structure
 
 For now you can add multiple custom component types, you pass `array` with each element as an object with a key that has component name, like our example is `service` and :
@@ -143,3 +133,4 @@ generator.exec([
 - For structure proprety `content` will be able accept path for file templates too
 - Improuve CLI experience
 - Write proper documentation
+- Add modificator to `[name]` like `lowerCase`, `upperCase` ...
