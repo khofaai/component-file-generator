@@ -7,7 +7,6 @@ const config = {
 	rl,
 
 	startCLI(callback, multipleChoices = {}) {
-
 		if((Array.isArray(multipleChoices) && multipleChoices.length > 0) || Object.keys(multipleChoices).length > 0 ) {
 			this.runMultipleChoiceQuestion(multipleChoices, callback);
 		} else {
@@ -16,23 +15,23 @@ const config = {
 	},
 
 	makeQuestion (question, callback) {
-  		return new Promise((resolve, reject) => {
-	    	config.rl.question(question, (answer) => {
-		    	callback(answer)
-					resolve();
-	    	});
-	  	});
+		return new Promise((resolve, reject) => {
+			config.rl.question(question, (answer) => {
+				callback(answer)
+				resolve();
+			});
+		});
 	},
 
 	async runQuestions (callback) {
-  		await config.makeQuestion(currentDirName + " name ? \n", answer => {
-  			config.componentName = answer;
-  		});
-  		callback(config.componentName);
-  		config.rl.close();
+		await config.makeQuestion(currentDirName + " name ? \n", answer => {
+			config.componentName = answer;
+		});
+		callback(config.componentName);
+		config.rl.close();
 	},
 
-	async runMultipleChoiceQuestion (multipleChoices, callback) {
+	async runMultipleChoiceQuestion(multipleChoices, callback) {
 
 		let cmdNames = 'Generate : ';
 		let selectedCommand = '';
@@ -41,7 +40,11 @@ const config = {
 
 		if(multipleChoices.length === 1) {
 			selectedCommand = Object.keys(multipleChoices[0])[0];
-			multipleChoiceStructures[selectedCommand] = multipleChoices[0];
+			if(typeof multipleChoices[0][selectedCommand] !== 'object') {
+				multipleChoiceStructures[selectedCommand] = multipleChoices[0];
+			} else {
+				multipleChoiceStructures[selectedCommand] = multipleChoices[0][selectedCommand];
+			}
 			defaultCommand.push(selectedCommand);
 		} else {
 			await multipleChoices.map(choice => {
@@ -49,7 +52,6 @@ const config = {
 				let key = Object.keys(choice)[0];
 				cmdNames += key;
 				defaultCommand.push(key);
-				console.log({choice})
 				multipleChoiceStructures[key] = choice[key];
 			});
 

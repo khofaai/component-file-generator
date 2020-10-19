@@ -6,12 +6,9 @@ const currentDirName = ((process.argv[2]) ? process.argv[2] : defaultDirName);
 filesystem.setSource("./src/" + currentDirName);
 let structureTarget = '';
 
-let replaceAll = (search, replacement, target) => {
-	return target.split(search).join(replacement);
-};
+let replaceAll = (search, replacement, target) => target.split(search).join(replacement);
 
 module.exports = {
-
 	checkNameFormat(componentName) {
 		if ( componentName === componentName.toUpperCase() ) { // if its all UpperCase ... for some reason .. watch your CapsLock pls
 			componentName = componentName.charAt(0) + componentName.slice(1).toLowerCase();
@@ -37,7 +34,6 @@ module.exports = {
 	},
 
 	promptQuestions(target) {
-
 		if(Array.isArray(target) && target.length > 0) {
 			configurator.startCLI(componentData => {
 				this.generateCustomComponent(componentData)
