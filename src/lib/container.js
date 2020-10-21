@@ -1,12 +1,33 @@
 const filesystem = require('./filesystem');
 const configurator = require('./configurator');
-const variable = '[name]';
+const variables = [
+	{
+		key: '[name]',
+		modificator: (s) => s,
+	},
+	{
+		key: '[name:lowerCase]',
+		modificator: (s) => s.toLowerCase(),
+	},
+	{
+		key: '[name:capitalize]',
+		modificator: (s) => {
+			if (typeof s !== 'string') return ''
+			return s.charAt(0).toUpperCase() + s.slice(1)
+		}
+	},
+];
 const defaultDirName = "components";
 const currentDirName = ((process.argv[2]) ? process.argv[2] : defaultDirName);
 filesystem.setSource("./src/" + currentDirName);
 let structureTarget = '';
 
-let replaceAll = (search, replacement, target) => target.split(search).join(replacement);
+let replaceAll = (replacement, target) => {
+	variables.map(({key, modificator}) => {
+		target = target.split(key).join(modificator(replacement))
+	});
+	return target;
+};
 
 module.exports = {
 	checkNameFormat(componentName) {
@@ -58,7 +79,7 @@ module.exports = {
 		let structure = require(`../config${structureTarget}/structure`);
 		let str = JSON.stringify(structure);
 
-		str = JSON.parse(replaceAll(variable, componentName, str));
+		str = JSON.parse(replaceAll(componentName, str));
 
 		this.mkStructure(str, () => {
 			console.log("\x1b[42m", `${componentName} has been created successfully`, "\x1b[0m");
@@ -68,7 +89,7 @@ module.exports = {
 	generateCustomComponent(componentData) {
 		let structure = componentData.body.structure;
 		let str = JSON.stringify(structure);
-		str = JSON.parse(replaceAll(variable, componentData.answer, str));
+		str = JSON.parse(replaceAll(componentData.answer, str));
 		filesystem.setSource(componentData.body.root);
 		this.mkStructure(str, () => console.log("\x1b[42m", `${componentData.answer} has been created successfully`, "\x1b[0m"));
 	},

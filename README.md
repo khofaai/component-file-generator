@@ -129,8 +129,24 @@ generator.exec([
 ]);
 ```
 
+## Name Modificators
+
+We only implimented two `lowerCase` and `capitalize` for the moment,
+
+you can use them like :
+```
+...
+{
+  type: "file",
+  name: "[name:lowerCase].md",
+  content: "# [name:capitalize] Service\n description"
+}
+...
+```
+
+
 ## Next
 - For structure proprety `content` will be able accept path for file templates too
 - Improuve CLI experience
 - Write proper documentation
-- Add modificator to `[name]` like `lowerCase`, `upperCase` ...
+- Add modificator to `[name]` like `upperCase` ...
