@@ -72,7 +72,6 @@ module.exports = {
 	},
 
 	generateCustomComponent(componentData) {
-		console.log({componentData})
 		let structure = componentData.body.structure;
 		let str = JSON.stringify(structure);
 		str = JSON.parse(replaceAll(componentData.answer, str));
