@@ -131,33 +131,12 @@ You can add one or multiple custom component types, you pass an `Object` with a 
 Example :
 ```javascript
 // in this case our component name is `service`
-generator.exec(
-  {
-    service: {
-      root:'./app/services',
-      structure: {
-        name: "[name]",
-        children:[
-          {
-            type: "file",
-            name: "readme.md",
-            content: "# [name] Service\n description"
-          },
-          {
-            type: "file",
-            name: "[name]Service.js",
-            content: `import Service from '../Service';\n\nexport default class [name] {\n\t// instruction\n\t}\n}\n`
-          },
-          {
-            type: "file",
-            name: "package.json",
-            content: "{\n\t\"main\": \"./[name]Service.js\"\n}"
-          }
-        ]
-      }
-    }
-  },
-);
+generator.exec({
+	[key]: { // component/module nane
+		root:'path/to/folder',
+		structure: { ... },
+	}
+});
 ```
 
 ## Name Modificators
@@ -182,4 +161,4 @@ you can use them like :
 ## Changelog 0.5.0
 - add name modificators: ['lowerCase', 'capitalize']
 - optimize workflow
--
+- update readme.md
