@@ -8,11 +8,7 @@ const config = {
 	rl,
 
 	startCLI(callback, multipleChoices = {}) {
-		if((Array.isArray(multipleChoices) && multipleChoices.length > 0) || Object.keys(multipleChoices).length > 0 ) {
-			this.runMultipleChoiceQuestion(multipleChoices, callback);
-		} else {
-			this.runQuestions(callback);
-		}
+		this.execQuestions(multipleChoices, callback);
 	},
 
 	makeQuestion(question, callback) {
@@ -41,27 +37,24 @@ const config = {
 		config.rl.close();
 	},
 
-	async runMultipleChoiceQuestion(multipleChoices, callback) {
+	async execQuestions(multipleChoices, callback) {
 		let cmdNames = 'Generate : ';
 		let selectedCommand = '';
 		let defaultCommand = [];
 		let multipleChoiceStructures = {};
+		const _multipleChoicesKeys = Object.keys(multipleChoices);
+		const _multipleChoicesLength = _multipleChoicesKeys.length;
 
-		if(multipleChoices.length === 1) {
-			selectedCommand = Object.keys(multipleChoices[0])[0];
-			if(typeof multipleChoices[0][selectedCommand] !== 'object') {
-				multipleChoiceStructures[selectedCommand] = multipleChoices[0];
-			} else {
-				multipleChoiceStructures[selectedCommand] = multipleChoices[0][selectedCommand];
-			}
+		if(_multipleChoicesLength === 1) {
+			selectedCommand = _multipleChoicesKeys[0];
+			multipleChoiceStructures[selectedCommand] = multipleChoices[selectedCommand];
 			defaultCommand.push(selectedCommand);
 		} else {
-			await multipleChoices.map(choice => {
+			await _multipleChoicesKeys.map(key => {
 				if(cmdNames != '') cmdNames += ', ';
-				let key = Object.keys(choice)[0];
 				cmdNames += key;
 				defaultCommand.push(key);
-				multipleChoiceStructures[key] = choice[key];
+				multipleChoiceStructures[key] = multipleChoices[key];
 			});
 
 			await config.makeOptionQuestion({
@@ -73,7 +66,7 @@ const config = {
 		}
 
 		if(defaultCommand && defaultCommand.includes(selectedCommand)) {
-			await config.makeQuestion(`${defaultCommand.length === 1 ? 'Its' : selectedCommand} name ?\n`, answer => {
+			await config.makeQuestion(`${selectedCommand} name ?\n`, answer => {
 				config.componentName = { answer, body: multipleChoiceStructures[selectedCommand] };
 			});
 			callback(config.componentName);
@@ -83,6 +76,5 @@ const config = {
 		config.rl.close();
 	}
 }
-
 
 module.exports = config;
