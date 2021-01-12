@@ -55,24 +55,9 @@ module.exports = {
 	},
 
 	promptQuestions(target) {
-		if(Array.isArray(target) && target.length > 0) {
-			configurator.startCLI(componentData => {
-				this.generateCustomComponent(componentData)
-			}, target);
-		} else if( typeof target === 'object') {
-			configurator.startCLI(componentData => {
-				this.generateCustomComponent(componentData)
-			}, [target]);
-		} else {
-			structureTarget = target !== '' ? `/${target}` : '';
-
-			configurator.startCLI(componentName => {
-				// check name format (no lowerCase only)
-				componentName = this.checkNameFormat(componentName);
-				// end check
-				this.generateComponent(componentName)
-			});
-		}
+		configurator.startCLI(componentData => {
+			this.generateCustomComponent(componentData)
+		}, target);
 	},
 
 	generateComponent(componentName) {
@@ -87,6 +72,7 @@ module.exports = {
 	},
 
 	generateCustomComponent(componentData) {
+		console.log({componentData})
 		let structure = componentData.body.structure;
 		let str = JSON.stringify(structure);
 		str = JSON.parse(replaceAll(componentData.answer, str));
