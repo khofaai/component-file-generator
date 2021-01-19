@@ -1,10 +1,13 @@
-# File Generator
+# Component File Generator
 
-this package helps me and our team to generate complex components structues by ease
+[![npm](https://img.shields.io/npm/v/component-file-generator.svg)](https://www.npmjs.com/package/component-file-generator) ![license](https://img.shields.io/github/license/khofaai/component-file-generator.svg) [![Build Status](https://travis-ci.org/khofaai/component-file-generator.svg?branch=master)](https://travis-ci.org/khofaai/component-file-generator) [![npm](https://img.shields.io/npm/dw/component-file-generator.svg)](https://www.npmjs.com/package/component-file-generator) [![npm](https://img.shields.io/npm/dt/component-file-generator.svg)](https://www.npmjs.com/package/component-file-generator)
+
+This package helps me and our team to generate complex components structues with ease
 
 # Installation
 
 you can install it using npm :
+
 ```bash
 npm i component-file-generator
 ```
