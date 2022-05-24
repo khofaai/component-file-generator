@@ -17,8 +17,8 @@ npm i component-file-generator
 ## Basic
 
 you need to install `node` on your machine to use this package,
-
 also create a simple file in your app root :
+
 ```
 └── projectName
     └── ...
